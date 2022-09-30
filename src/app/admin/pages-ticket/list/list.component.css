@@ -1,0 +1,12 @@
+::ng-deep .ant-table-column-sorter {
+    margin-left: 4px;
+    color:  #333C83;
+    font-size: 0;
+    transition: color .3s;
+}
+
+::ng-deep .ant-table.ant-table-middle .ant-table-filter-trigger {
+    margin-right: -4px;
+    color: #333C83;
+}
+

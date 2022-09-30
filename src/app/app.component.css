@@ -1,0 +1,136 @@
+/* .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+nz-content {
+  margin: 0 16px;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 360px;
+}
+
+nz-footer {
+  text-align: center;
+} */
+
+
+.trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .trigger:hover {
+    color: #1890ff;
+  }
+  
+  .logo {
+    height: 32px;
+    margin: 16px;
+  
+    color: #fff;
+    text-align: center;
+  }
+  .imagelogo{
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  
+  .borderImage{
+    /*   -webkit-box-shadow: 0px 0px 0px 12px rgba(255,255,255,1);
+      -moz-box-shadow: 0px 0px 0px 12px rgba(255,255,255,1);
+      box-shadow: 0px 0px 0px 12px rgba(255,255,255,1); */
+      -webkit-box-shadow: 0px 0px 18px -2px rgba(0,0,0,0.75);
+      -moz-box-shadow: 0px 0px 18px -2px rgba(0,0,0,0.75);
+      box-shadow: 0px 0px 18px -2px rgba(0,0,0,0.75);
+      border: 10px solid  #ffffff;
+      
+  }
+  
+  nz-header {
+    background: #fff;
+    padding: 0;
+    display:flex;
+    /* justify-content: space-between; */
+  }
+  
+  nz-content {
+    margin: 0 16px;
+  }
+  
+  nz-breadcrumb {
+    margin: 16px 0;
+  }
+  
+  .inner-content {
+    padding: 24px;
+    background: #fff;
+    min-height: 360px;
+  }
+  
+  nz-footer {
+    text-align: center;
+  }
+  /* 
+  nz-sider{
+    background: #EDF2F7;
+  }
+  
+  
+  ::ng-deep  .ant-layout-sider-children {
+    background-color: #EDF2F7;
+    height: 100%;
+    margin-top: -0.1px;
+    padding-top: 0.1px;
+  }
+  
+  
+  ::ng-deep menu-vertical-right, .ant-menu-root.ant-menu-inline {
+    background-color: #EDF2F7;
+    box-shadow: none;
+  }
+  
+  ::ng-deep menu-vertical-right, .ant-menu-root.ant-menu-inline[_ngcontent-foo-c48] {
+    background-color: #EDF2F7;
+    padding: 20%;
+  
+    box-shadow: none;
+  }
+  
+  ::ng-deep .ant-menu {
+    box-sizing: border-box;
+    font-variant: tabular-nums;
+    font-feature-settings: 'tnum', "tnum";
+    color: rgba(0,0,0,.85);
+    font-size: 14px;
+    line-height: 0;
+    background: #EDF2F7;
+    transition: background .3s,width .3s cubic-bezier(.2,0,0,1) 0s;
+  } */
+  
+  
+  

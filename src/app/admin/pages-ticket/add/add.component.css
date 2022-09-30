@@ -1,0 +1,23 @@
+.inner-content {
+    background: #fff;
+    padding: 24px;
+    min-height: 280px;
+  }
+
+  .form{
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .form-group{
+    margin-bottom: 20px;
+  }
+  nz-select {
+    width: 50%;
+  }
+
+.izquierda{
+    float: right;
+
+}
+

@@ -1,0 +1,191 @@
+<nz-page-header nzBackIcon [nzGhost]="false">
+    <nz-page-header-title>Editar ticket</nz-page-header-title>
+    <nz-page-header-extra>
+        <nz-space>
+            <button *nzSpaceItem nz-button (click)="back()">Cancelar</button>
+            <button *nzSpaceItem nz-button nzType="primary" (click)="submitForm()">Guardar</button>
+        </nz-space>
+    </nz-page-header-extra>
+</nz-page-header>
+
+
+<nz-spin [nzSpinning]="loading">
+
+    <div class="inner-content">
+        <div class="form">
+            <div class="form-goup">
+
+                <form nz-form [formGroup]="validateFormTicket">
+
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7" nzRequired>Persona solicitante</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzErrorTip="Por favor escriba un nombre!">
+                            <nz-input-group>
+                                <input type="text" formControlName="persona_solicitante" nz-input
+                                    placeholder="Nombre de la persona" />
+                            </nz-input-group>
+
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-label nzRequired [nzSpan]="7">Fecha de ingreso</nz-form-label>
+                        <nz-form-control [nzSpan]="12">
+                            <nz-input-group>
+                                <nz-date-picker style="width: 200px;" formControlName="fecha_ingreso"></nz-date-picker>
+
+                            </nz-input-group>
+
+                        </nz-form-control>
+                    </nz-form-item>
+
+
+
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7" nzRequired>Asunto</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzErrorTip="Por favor escriba un asunto!">
+                            <nz-input-group>
+                                <input type="text" formControlName="asunto" nz-input placeholder="Asunto del ticket" />
+                            </nz-input-group>
+
+                        </nz-form-control>
+                    </nz-form-item>
+
+
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7">Descripción</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzErrorTip="Por favor escriba una descripción correcta!">
+                            <nz-input-group>
+                                <nz-textarea-count [nzMaxCharacterCount]="150">
+                                    <textarea formControlName="descripcion" nz-input
+                                        placeholder="Descripción del detalle"></textarea>
+                                </nz-textarea-count>
+                            </nz-input-group>
+
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7">Estado</nz-form-label>
+                        <nz-form-control [nzSpan]="5">
+                            <nz-select ngModel={{ticket.status}} formControlName="status">
+                                <nz-option nzValue="P" nzLabel="Pendiente"></nz-option>
+                                <nz-option nzValue="C" nzLabel="Cerrado"></nz-option>
+                            </nz-select>
+
+                        </nz-form-control>
+
+                    </nz-form-item>
+
+
+                </form>
+
+                <div *ngIf="!ticket.historial_incidencia" style="text-align: center;">
+                    <button *ngIf="!showFormHistorial" nz-button nzType="primary" (click)="showModalHistorial()">Agregar
+                        historial</button>
+
+                    <button *ngIf="showFormHistorial" nz-button nzType="primary" nzDanger nz-popconfirm
+                        nzPopconfirmTitle="¿Esta seguro de ocultar el historial? Los campos ingresados se perderán."
+                        (nzOnConfirm)="ocultarlHistorial()">Ocultar historial</button>
+                </div>
+
+
+                <form *ngIf="ticket.historial_incidencia || showFormHistorial" nz-form [formGroup]="validateForm">
+
+
+                    <nz-divider style="color: #3e467d; font-size: 20px; font-weight: bold;"
+                        nzText="Historial de incidencias"></nz-divider>
+
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7" nzRequired>Usuario soporte</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzErrorTip="Por favor escriba un nombre!">
+                            <nz-input-group>
+                                <input type="text" formControlName="usuario_soporte" nz-input
+                                    placeholder="Nombre del usuario" />
+                            </nz-input-group>
+
+                        </nz-form-control>
+                    </nz-form-item>
+
+
+
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7">Comentario</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzErrorTip="Por favor escriba un comentario!">
+                            <nz-input-group>
+                                <input type="text" formControlName="comentario" nz-input placeholder="Comentario" />
+                            </nz-input-group>
+
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7">Fecha atención</nz-form-label>
+                        <nz-form-control [nzSpan]="12">
+                            <nz-input-group>
+                                <input type="text" formControlName="fecha_atencion" nz-input />
+                            </nz-input-group>
+
+                        </nz-form-control>
+                    </nz-form-item>
+
+
+                    <div formArrayName="details" *ngFor="let detail of details.controls; let i = index">
+
+                        <div [formGroupName]="i">
+                            <nz-divider [nzText]="'Detalle ' + (i + 1)"></nz-divider>
+
+                            <div class="izquierda">
+                                <button nz-button nzType="default" nz-popconfirm
+                                    nzPopconfirmTitle="¿Está seguro de eliminar este detalle?"
+                                    (nzOnConfirm)="removeDetail(i, detail.get('id').value)" nzPopconfirmPlacement="top"
+                                    nz-button nzDanger nzShape="circle" nzSize="default">
+                                    <i nz-icon nzType="delete"></i>
+                                </button>
+                            </div>
+
+                            <br>
+                            <br>
+
+
+
+                            <nz-form-item>
+                                <nz-form-label [attr.for]="'description' + i" [nzSpan]="7" nzRequired>Descripción del
+                                    detalle
+                                </nz-form-label>
+
+
+                                <nz-form-control [nzSpan]="12" nzErrorTip="Por favor escriba una descripción correcta!">
+                                    <nz-input-group nzRequired>
+                                        <nz-textarea-count [nzMaxCharacterCount]="150">
+                                            <textarea [attr.id]="'descripcion' + i" formControlName="descripcion"
+                                                nz-input [(ngModel)]="detail.get('descripcion').value"
+                                                placeholder="Descripción del detalle"></textarea>
+                                        </nz-textarea-count>
+                                    </nz-input-group>
+
+                                </nz-form-control>
+                            </nz-form-item>
+
+
+
+                        </div>
+                    </div>
+
+                    <nz-divider nzDashed [nzText]="text">
+                        <ng-template #text>
+
+                            <button nz-button nzType="primary" (click)="addDetail(details.controls.length)">
+                                <i nz-icon nzType="plus"></i>
+                                Añadir detalle
+                            </button>
+
+                        </ng-template>
+                    </nz-divider>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</nz-spin>

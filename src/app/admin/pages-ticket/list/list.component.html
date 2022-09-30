@@ -1,0 +1,65 @@
+<div class="site-page-header-ghost-wrapper">
+    <nz-page-header [nzGhost]="false">
+        <nz-page-header-title>Tickets</nz-page-header-title>
+
+    </nz-page-header>
+</div>
+<app-barra></app-barra>
+
+
+<br>
+
+
+<nz-spin [nzSpinning]="loading">
+
+    <nz-table nzNoResult={{dataFound}} nzSize="middle" nzTableLayout="fixed" [nzFrontPagination]="false"
+        nzShowPagination="false" (nzQueryParams)="onQueryParamsChange($event)">
+        <thead>
+
+            <tr>
+                <th nzColumnKey="id" nzWidth="100px"></th>
+                <th nzColumnKey="persona_solicitante" [nzSortFn]="true">Persona Solicitante</th>
+                <th nzColumnKey="fecha_ingreso" [nzSortFn]="true">Fecha de ingreso</th>
+                <th nzColumnKey="asunto" [nzSortFn]="true">Asunto</th>
+                <th nzColumnKey="descripcion" [nzSortFn]="true">Descripción</th>
+                <th nzAlign="center" nzColumnKey="status" [nzFilters]="filterGender" [nzFilterFn]="true">Estado</th>
+                <th nzColumnKey="Acciones">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ticket of tickets; let i = index">
+
+
+                <td>{{getIndexNumber(i)}}</td>
+                <td>{{ ticket.persona_solicitante }}</td>
+
+                <td>{{ ticket.fecha_ingreso | date:'dd/MM/YYYY' }}</td>
+                <td nzEllipsis>{{ ticket.asunto }}</td>
+                <td nzEllipsis>{{ ticket.descripcion }}</td>
+                <td nzAlign="center">
+                    <nz-tag style="padding: 0px 25px 0px;" [nzColor]="ticket.status != 'P' ? '#2db7f5' : '#f50'"
+                        nz-tooltip [nzTooltipTitle]="ticket.status != 'P' ? 'Cerrado' : 'Pendiente'">
+                        {{ticket.status}}
+
+
+                    </nz-tag>
+                </td>
+
+                <td>
+                    <a (click)="editRow(ticket.id)">Editar</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a style="color: #ff4d4f" nz-popconfirm nzPopconfirmTitle="¿Esta seguro de eliminar el ticket?"
+                        (nzOnConfirm)="deleteRow(ticket.id)">Eliminar</a>
+
+                </td>
+            </tr>
+
+        </tbody>
+    </nz-table>
+
+</nz-spin>
+
+<nz-pagination [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="pageTotal"
+    (nzPageIndexChange)="pageIndexChange($event)">
+
+</nz-pagination>

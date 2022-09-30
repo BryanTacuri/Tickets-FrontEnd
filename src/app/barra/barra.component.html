@@ -1,0 +1,28 @@
+<div class="container">
+
+    <div style="width: 30%;">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input type="text" nz-input [formControl]="inputSearch" placeholder="Búsqueda" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+            <i nz-icon nzType="search"></i>
+        </ng-template>
+
+    </div>
+
+    <div>
+        <nz-form-label [nzSpan]="7">Filtrar por fecha</nz-form-label>
+        <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChangeDate($event)"></nz-range-picker>
+
+    </div>
+
+    <div>
+
+        <button nz-button (click)="add()" nzType="primary" style="width: 150px; margin-right: 20px;">
+            <i nz-icon nzType="plus"></i>
+            Agregar
+        </button>
+    </div>
+
+
+</div>
